@@ -7,7 +7,10 @@ def bq_to_bucket(bucket_url, sql, staging_dataset=None, bq_client=bigquery.Clien
 
     """Runs SQL in BigQuery and stores results in Storage"""
 
-    
+    if staging_dataset is None:
+        return
+        #TODO: create random staging dataset
+        
     letters = string.ascii_lowercase
     staging_table = '{}.{}.temp_table'.format(bq_client.project, staging_dataset) + ''.join(random.choice(letters) for i in range(120))
     

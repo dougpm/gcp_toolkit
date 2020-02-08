@@ -1,11 +1,13 @@
 import string
 import random
+import logging
 from google.cloud import bigquery, storage
 
-def bq_to_bucket(bq_client, storage_client, staging_dataset, bucket_url, sql):
+def bq_to_bucket(bucket_url, sql, staging_dataset=None, bq_client=bigquery.Client(), storage_client=storage.Client()):
 
     """Runs SQL in BigQuery and stores results in Storage"""
 
+    
     letters = string.ascii_lowercase
     staging_table = '{}.{}.temp_table'.format(bq_client.project, staging_dataset) + ''.join(random.choice(letters) for i in range(120))
     

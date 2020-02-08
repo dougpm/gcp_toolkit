@@ -34,9 +34,11 @@ def bucket_to_df(bucket_name, path_to_file, storage_client=storage.Client()):
     """Reads a file or a group of files matching a pattern into a pandas Data Frame"""
 
     df = pd.DataFrame()
+    partial_df = pd.DataFrame()
     bucket = storage_client.get_bucket(bucket_name)
     blobs = bucket.list_blobs()
     for blob in blobs:
+        print(blob.name)
         if path_to_file in blob.name:
             url = 'gs://{}/{}'.format(bucket_name, blob.name)
             #TODO: more file formats

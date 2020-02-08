@@ -2,6 +2,7 @@ import string
 import random
 import logging
 from google.cloud import bigquery, storage
+import pandas as pd
 
 def bq_to_bucket(sql, bucket_url, staging_dataset=None, bq_client=bigquery.Client(), storage_client=storage.Client()):
 
@@ -26,7 +27,27 @@ def bq_to_bucket(sql, bucket_url, staging_dataset=None, bq_client=bigquery.Clien
 
     bq_client.delete_table(staging_table)
 
-#TODO: bucket_to_df
+
+
+def bucket_to_df(bucket_name, path_to_file, storage_client=storage.Client()):
+
+    """Reads a file or a group of files matching a pattern into a pandas Data Frame"""
+
+    df = pd.DataFrame()
+    bucket = storage_client.get_bucket(bucket_name)
+    blobs = bucket.list_blobs()
+    for blob in blobs:
+        if path_to_file in blob.name:
+            url = 'gs://{}/{}'.format(bucket_name, blob.name)
+            #TODO: more file formats
+            partial_df = pd.read_csv(url, index_col=False, low_memory=False)
+        df = df.append(partial_df)
+    
+    return df
+
+    
+
+
+
+
 #TODO: bq_to_df
-
-

@@ -43,7 +43,7 @@ def bucket_to_df(bucket_name, path_to_file, storage_client=storage.Client()):
             url = 'gs://{}/{}'.format(bucket_name, blob.name)
             #TODO: more file formats
             partial_df = pd.read_csv(url, index_col=False, low_memory=False)
-        df = df.append(partial_df)
+            df = df.append(partial_df)
     
     return df
 

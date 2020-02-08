@@ -3,7 +3,7 @@ import random
 import logging
 from google.cloud import bigquery, storage
 
-def bq_to_bucket(bucket_url, sql, staging_dataset=None, bq_client=bigquery.Client(), storage_client=storage.Client()):
+def bq_to_bucket(sql, bucket_url, staging_dataset=None, bq_client=bigquery.Client(), storage_client=storage.Client()):
 
     """Runs SQL in BigQuery and stores results in Storage"""
 

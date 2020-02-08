@@ -4,7 +4,7 @@ import logging
 from google.cloud import bigquery, storage
 import pandas as pd
 
-def bq_to_bucket(sql, bucket_url, staging_dataset=None, bq_client=bigquery.Client(), storage_client=storage.Client()):
+def bq_to_bucket(sql, bucket_file_url, staging_dataset=None, bq_client=bigquery.Client(), storage_client=storage.Client()):
 
     """Runs SQL in BigQuery and stores results in Storage"""
 
@@ -22,7 +22,7 @@ def bq_to_bucket(sql, bucket_url, staging_dataset=None, bq_client=bigquery.Clien
 
     query_job.result()
 
-    extract_job = bq_client.extract_table(staging_table, bucket_url)
+    extract_job = bq_client.extract_table(staging_table, bucket_file_url)
     extract_job.result()
 
     bq_client.delete_table(staging_table)
@@ -48,8 +48,13 @@ def bucket_to_df(bucket_name, path_to_file, storage_client=storage.Client()):
     return df
 
     
+def bq_to_df(query):
+    
+    #TODO: create temporary bucket
+    #create temporary dataset
+    #call bq_to_bucket using temporary bucket and dataset
+    #call bucket_to_df using temp bucket and file names
+    pass
 
 
 
-
-#TODO: bq_to_df

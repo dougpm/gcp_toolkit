@@ -3,6 +3,7 @@ import random
 import logging
 from google.cloud import bigquery, storage
 import pandas as pd
+import gcp_toolkit.utils as gtku
 
 def bq_to_bucket(sql, bucket_file_url, staging_dataset=None, bq_client=bigquery.Client(), storage_client=storage.Client()):
 
@@ -47,16 +48,6 @@ def bucket_to_df(bucket_name, path_to_file, storage_client=storage.Client()):
     
     return df
 
-def create_bucket_folder(bucket_name, folder_name):
-
-    """Creates a Folder in Storage"""
-    
-    if '/' not in folder_name:
-        folder_name = folder_name + '/'
-    storage_client = storage.Client()
-    bucket = storage_client.get_bucket(bucket_name)
-    blob = bucket.blob(folder_name)
-    blob.upload_from_string('')
 
 def bq_to_df(query, bucket_name, bigquery_client=bigquery.Client(), storage_client=storage.Client()):
     
@@ -64,7 +55,7 @@ def bq_to_df(query, bucket_name, bigquery_client=bigquery.Client(), storage_clie
 
     letters = string.ascii_lowercase
     staging_blob = ''.join(random.choice(letters) for i in range(100))
-    create_bucket_blob(bucket_name, staging_blob)
+    gtku.utils.create_bucket_folder(bucket_name, staging_blob)
 
     #TODO: create temporary bucket folder
     #create temporary dataset

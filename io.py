@@ -57,6 +57,7 @@ def bucket_to_df(bucket_name, path_to_file, storage_client=None):
 def bq_to_df(query, bucket_name, staging_dataset=None, bigquery_client=None, storage_client=None):
     
     """Runs a query in BigQuery and loads the results into a pandas Data Frame"""
+
     if bigquery_client is None:
         bigquery_client = bigquery.Client()
     if storage_client is None:
@@ -68,8 +69,9 @@ def bq_to_df(query, bucket_name, staging_dataset=None, bigquery_client=None, sto
     print('Created {}'.format(staging_blob))
     
     bq_to_bucket(query, 'gs://{}/{}results'.format(bucket_name, staging_blob), staging_dataset, bigquery_client, storage_client)
-    df = bucket_to_df(bucket_name, '{}/{}results'.format(bucket_name, staging_blob), storage_client)
+    df = bucket_to_df(bucket_name, '{}results'.format(staging_blob), storage_client)
 
+    #TODO: finally statement or context manager
     bucket = storage_client.get_bucket(bucket_name)
     bucket.delete_blob(staging_blob)
 

@@ -43,11 +43,11 @@ class IO:
 
         df = pd.DataFrame()
         partial_df = pd.DataFrame()
-        bucket = self.storage_client.get_bucket(bucket_name)
+        bucket = self.storage_client.get_bucket(self.bucket_name)
         blobs = bucket.list_blobs()
         for blob in blobs:
             if path_to_file in blob.name:
-                url = 'gs://{}/{}'.format(bucket_name, blob.name)
+                url = 'gs://{}/{}'.format(self.bucket_name, blob.name)
                 #TODO: more file formats
                 partial_df = pd.read_csv(url, index_col=False, low_memory=False)
                 df = df.append(partial_df)

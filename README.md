@@ -2,9 +2,9 @@
 
 ## What is it?
 
-**gcp_toolkit** is a Python package providing classes to make it easier to 
+**gcp_toolkit** is a Python package that makes it easier to 
 perform common operations on **Google Cloud Platform**, such as moving data from
-a BigQuery table to Storage, or loading it into a **pandas** Data Frame for analysis.
+a BigQuery table to Storage or loading it into a **pandas** Data Frame for analysis.
 
 ## Main Features
 Here are some features:
@@ -15,7 +15,7 @@ Here are some features:
   - Create "folder" in Storage bucket
 
 ## Usage guide
-To use the toolkit, clone this repo into your project root folder (will deploy to PyPI in the future)
+To use the toolkit, clone this repo into your project root folder (will deploy to PyPI in the future).
 
 ```sh
 git clone https://github.com/dougpm/gcp_toolkit.git
@@ -36,7 +36,7 @@ You can now use the classes method's such as:
 df = io.bucket_to_df('path/to/files')
 ```
 
-A quick overview of functionalities will be available in the Documentation
+A quick overview of functionalities will be available in the Documentation.
 
 ## License
 

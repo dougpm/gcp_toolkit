@@ -50,7 +50,9 @@ def bucket_to_df(bucket_name, path_to_file, storage_client=storage.Client()):
 def create_bucket_folder(bucket_name, folder_name):
 
     """Creates a Folder in Storage"""
-
+    
+    if '/' not in folder_name:
+        folder_name = folder_name + '/'
     storage_client = storage.Client()
     bucket = storage_client.get_bucket(bucket_name)
     blob = bucket.blob(folder_name)
@@ -59,7 +61,7 @@ def create_bucket_folder(bucket_name, folder_name):
 def bq_to_df(query, bucket_name, bigquery_client=bigquery.Client(), storage_client=storage.Client()):
     
     """Runs a query in BigQuery and loads the results into a pandas Data Frame"""
-    
+
     letters = string.ascii_lowercase
     staging_blob = ''.join(random.choice(letters) for i in range(100))
     create_bucket_blob(bucket_name, staging_blob)

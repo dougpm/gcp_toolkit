@@ -15,7 +15,9 @@ def bq_to_bucket(query, bucket_file_url, staging_dataset=None, bigquery_client=N
         storage_client = storage.Client()
     if staging_dataset is None:
         return
-        #TODO: create random staging dataset
+        print('no staging_dataset in bq_to_bucket')
+        #TODO: create random staging dataset function in utils
+
     letters = string.ascii_lowercase
     staging_table = '{}.{}.temp_table'.format(bigquery_client.project, staging_dataset) + ''.join(random.choice(letters) for i in range(100))
     

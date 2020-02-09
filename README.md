@@ -21,7 +21,7 @@ To use the toolkit, clone this repo into your project root folder (will deploy t
 git clone https://github.com/dougpm/gcp_toolkit.git
 ```
 
-Then import it in you code
+Then import it in your code:
 
 ```python
 import gcp_toolkit as gtk

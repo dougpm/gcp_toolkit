@@ -45,7 +45,6 @@ def bucket_to_df(bucket_name, path_to_file, storage_client=None):
     bucket = storage_client.get_bucket(bucket_name)
     blobs = bucket.list_blobs()
     for blob in blobs:
-        print(blob.name)
         if path_to_file in blob.name:
             url = 'gs://{}/{}'.format(bucket_name, blob.name)
             #TODO: more file formats
@@ -63,10 +62,10 @@ def bq_to_df(query, bucket_name, staging_dataset=None, bigquery_client=None, sto
     if storage_client is None:
         storage_client = storage.Client()
 
-    
     letters = string.ascii_lowercase
     staging_blob = ''.join(random.choice(letters) for i in range(100)) + '/'
     gtku.create_bucket_folder(bucket_name, staging_blob)
+    print('Created {}'.format(staging_blob))
     
     bq_to_bucket(query, 'gs://{}/{}results'.format(bucket_name, staging_blob), staging_dataset, bigquery_client, storage_client)
     df = bucket_to_df(bucket_name, '{}/{}results'.format(bucket_name, staging_blob), storage_client)

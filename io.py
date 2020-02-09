@@ -63,7 +63,7 @@ def bq_to_df(query, bucket_name, bigquery_client=None, storage_client=None):
     if storage_client is None:
         storage_client = storage.Client()
     letters = string.ascii_lowercase
-    staging_blob = ''.join(random.choice(letters) for i in range(100))
+    staging_blob = ''.join(random.choice(letters) for i in range(100)) + '/'
     gtku.create_bucket_folder(bucket_name, staging_blob)
     bucket = storage_client.get_bucket(bucket_name)
     bucket.delete_blob(staging_blob)

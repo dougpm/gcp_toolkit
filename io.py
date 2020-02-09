@@ -17,7 +17,7 @@ def bq_to_bucket(query, bucket_file_url, staging_dataset=None, bigquery_client=N
         return
         #TODO: create random staging dataset
     letters = string.ascii_lowercase
-    staging_table = '{}.{}.temp_table'.format(bq_client.project, staging_dataset) + ''.join(random.choice(letters) for i in range(100))
+    staging_table = '{}.{}.temp_table'.format(bigquery_client.project, staging_dataset) + ''.join(random.choice(letters) for i in range(100))
     
     job_config = bigquery.QueryJobConfig()
     job_config.destination = staging_table

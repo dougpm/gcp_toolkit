@@ -22,4 +22,5 @@ Indices and tables
 .. toctree::
    :maxdepth: 1 
 
+   Tutorial <tutorial>
    API Reference <modules>

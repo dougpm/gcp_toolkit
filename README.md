@@ -41,7 +41,6 @@ A quick overview of functionalities will be available in the Documentation
 ## License
 
 ## Documentation
-The official documentation is hosted on PyData.org: https://pandas.pydata.org/pandas-docs/stable
 
 ## Contributing 
 

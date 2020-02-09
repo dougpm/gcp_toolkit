@@ -22,16 +22,14 @@ def bq_to_bucket(query, bucket_file_url, staging_dataset=None, bigquery_client=N
     job_config = bigquery.QueryJobConfig()
     job_config.destination = staging_table
 
-    query_job = bq_client.query(query, job_config=job_config)
+    query_job = bigquery_client.query(query, job_config=job_config)
 
     query_job.result()
 
-    extract_job = bq_client.extract_table(staging_table, bucket_file_url)
+    extract_job = bigquery_client.extract_table(staging_table, bucket_file_url)
     extract_job.result()
 
-    bq_client.delete_table(staging_table)
-
-
+    bigquery_client.delete_table(staging_table)
 
 def bucket_to_df(bucket_name, path_to_file, storage_client=None):
 

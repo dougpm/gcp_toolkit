@@ -47,14 +47,28 @@ def bucket_to_df(bucket_name, path_to_file, storage_client=storage.Client()):
     
     return df
 
+def create_bucket_folder(bucket_name, folder_name):
+
+    """Creates a Folder in Storage"""
+
+    storage_client = storage.Client()
+    bucket = storage_client.get_bucket(bucket_name)
+    blob = bucket.blob(folder_name)
+    blob.upload_from_string('')
+
+def bq_to_df(query, bucket_name, bigquery_client=bigquery.Client(), storage_client=storage.Client()):
     
-def bq_to_df(query):
+    """Runs a query in BigQuery and loads the results into a pandas Data Frame"""
     
-    #TODO: create temporary bucket
+    letters = string.ascii_lowercase
+    staging_blob = ''.join(random.choice(letters) for i in range(100))
+    create_bucket_blob(bucket_name, staging_blob)
+
+    #TODO: create temporary bucket folder
     #create temporary dataset
     #call bq_to_bucket using temporary bucket and dataset
     #call bucket_to_df using temp bucket and file names
-    pass
 
+#TODO: df_to_bq
 
 

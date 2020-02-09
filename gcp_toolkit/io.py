@@ -5,14 +5,17 @@ from google.cloud import bigquery, storage
 import pandas as pd
 import gcp_toolkit.utils as gtku
 
-def bq_to_bucket(sql, bucket_file_url, staging_dataset=None, bq_client=bigquery.Client(), storage_client=storage.Client()):
+def bq_to_bucket(sql, bucket_file_url, staging_dataset=None, bq_client=None, storage_client=None):
 
     """Runs SQL in BigQuery and stores results in Storage"""
 
+    if bigquery_client is None:
+        bigquery_client = bigquery.Client()
+    if storage_client is None:
+        storage_client = storage.Client()
     if staging_dataset is None:
         return
         #TODO: create random staging dataset
-        
     letters = string.ascii_lowercase
     staging_table = '{}.{}.temp_table'.format(bq_client.project, staging_dataset) + ''.join(random.choice(letters) for i in range(100))
     
@@ -30,9 +33,12 @@ def bq_to_bucket(sql, bucket_file_url, staging_dataset=None, bq_client=bigquery.
 
 
 
-def bucket_to_df(bucket_name, path_to_file, storage_client=storage.Client()):
+def bucket_to_df(bucket_name, path_to_file, storage_client=None):
 
     """Reads a file or a group of files matching a pattern into a pandas Data Frame"""
+
+    if storage_client is None:
+        storage_client = storage.Client()
 
     df = pd.DataFrame()
     partial_df = pd.DataFrame()
@@ -49,10 +55,13 @@ def bucket_to_df(bucket_name, path_to_file, storage_client=storage.Client()):
     return df
 
 
-def bq_to_df(query, bucket_name, bigquery_client=bigquery.Client(), storage_client=storage.Client()):
+def bq_to_df(query, bucket_name, bigquery_client=None, storage_client=None):
     
     """Runs a query in BigQuery and loads the results into a pandas Data Frame"""
-
+    if bigquery_client is None:
+        bigquery_client = bigquery.Client()
+    if storage_client is None:
+        storage_client = storage.Client()
     letters = string.ascii_lowercase
     staging_blob = ''.join(random.choice(letters) for i in range(100))
     gtku.utils.create_bucket_folder(bucket_name, staging_blob)

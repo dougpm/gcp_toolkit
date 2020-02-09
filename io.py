@@ -5,7 +5,7 @@ from google.cloud import bigquery, storage
 import pandas as pd
 import gcp_toolkit.utils as gtku
 
-def bq_to_bucket(query, bucket_file_url, staging_dataset=None, bq_client=None, storage_client=None):
+def bq_to_bucket(query, bucket_file_url, staging_dataset=None, bigquery_client=None, storage_client=None):
 
     """Runs query in BigQuery and stores results in Storage"""
 

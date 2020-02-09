@@ -64,7 +64,7 @@ def bq_to_df(query, bucket_name, bigquery_client=None, storage_client=None):
         storage_client = storage.Client()
     letters = string.ascii_lowercase
     staging_blob = ''.join(random.choice(letters) for i in range(100))
-    gtku.utils.create_bucket_folder(bucket_name, staging_blob)
+    gtku.create_bucket_folder(bucket_name, staging_blob)
 
     #TODO: create temporary bucket folder
     #create temporary dataset

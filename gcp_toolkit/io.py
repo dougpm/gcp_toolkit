@@ -27,8 +27,8 @@ class IO:
         
         job_config = bigquery.QueryJobConfig()
         job_config.destination = staging_table
-
         query_job = self.bq_client.query(query, job_config=job_config)
+
         query_job.result()
 
         extract_job = self.bq_client.extract_table(staging_table, bucket_file_url)
@@ -55,7 +55,7 @@ class IO:
         return df
 
 
-    def bq_to_df(self, query, staging_dataset=None):
+    def bq_to_df(self, query, staging_dataset=None, use_builtin=False):
         
         """Runs a query in BigQuery and loads the results into a pandas Data Frame"""
 
@@ -64,13 +64,18 @@ class IO:
             print('no staging_dataset in bq_to_bucket')
             #TODO: create random staging dataset function in utils, call it in constructor
 
+        if use_builtin:
+            job_config = bigquery.QueryJobConfig()
+            query_job = self.bq_client.query(query, job_config=job_config)  
+            return query_job.result().to_dataframe()
+
         letters = string.ascii_lowercase
         staging_blob = ''.join(random.choice(letters) for i in range(100)) + '/'
         gtku.create_bucket_folder(self.bucket_name, staging_blob)
         print('Created {}'.format(staging_blob))
         
-        bq_to_bucket(query, 'gs://{}/{}results'.format(self.bucket_name, staging_blob), staging_dataset, self.bq_client, self.storage_client)
-        df = bucket_to_df(self.bucket_name, '{}results'.format(staging_blob), self.storage_client)
+        self.bq_to_bucket(query, 'gs://{}/{}results'.format(self.bucket_name, staging_blob), staging_dataset)
+        df = self.bucket_to_df(self.bucket_name, '{}results'.format(staging_blob))
 
         #TODO: finally statement or context manager
         bucket = self.storage_client.get_bucket(self.bucket_name)

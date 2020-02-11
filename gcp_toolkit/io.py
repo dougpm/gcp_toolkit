@@ -17,8 +17,7 @@ class IO:
         """Runs query in BigQuery and stores results in Storage"""
 
         if staging_dataset is None:
-            return
-            print('no staging_dataset in bq_to_bucket')
+            raise
             #TODO: create random staging dataset function in utils, call it in constructor
 
         bucket_file_url = 'gs://{}/{}'.format(self.bucket_name, path_to_file)
@@ -55,19 +54,17 @@ class IO:
         return df
 
 
-    def bq_to_df(self, query, staging_dataset=None, use_builtin=False):
+    def bq_to_df(self, query, staging_dataset=None, use_builtin=True):
         
         """Runs a query in BigQuery and loads the results into a pandas Data Frame"""
+        
+        if use_builtin:
+            query_job = self.bq_client.query(query)  
+            return query_job.result().to_dataframe()
 
         if staging_dataset is None:
-            return
-            print('no staging_dataset in bq_to_bucket')
+            raise
             #TODO: create random staging dataset function in utils, call it in constructor
-
-        if use_builtin:
-            job_config = bigquery.QueryJobConfig()
-            query_job = self.bq_client.query(query, job_config=job_config)  
-            return query_job.result().to_dataframe()
 
         letters = string.ascii_lowercase
         staging_blob = ''.join(random.choice(letters) for i in range(100)) + '/'
@@ -75,7 +72,7 @@ class IO:
         print('Created {}'.format(staging_blob))
         
         self.bq_to_bucket(query, 'gs://{}/{}results'.format(self.bucket_name, staging_blob), staging_dataset)
-        df = self.bucket_to_df(self.bucket_name, '{}results'.format(staging_blob))
+        df = self.bucket_to_df('{}results'.format(staging_blob))
 
         #TODO: finally statement or context manager
         bucket = self.storage_client.get_bucket(self.bucket_name)
@@ -83,6 +80,15 @@ class IO:
 
         return df
 
-#TODO: df_to_bq
+
+    def df_to_bq(self, df, table_id, schema=[]):
+
+        """Writes a pandas Data Frame to a BigQuery table."""
+
+        job_config = bigquery.LoadJobConfig(schema=schema)
+        job_config.write_disposition = bigquery.WriteDisposition.WRITE_TRUNCATE
+        job = self.bq_client.load_table_from_dataframe(df, table_id, job_config=job_config)
+        
+        job.result()
 
 

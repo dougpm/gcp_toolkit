@@ -24,12 +24,14 @@ Using the IO class:
     io = gtk.IO('your-bucket-name', 'your-dataset-name')
 
 Note: You must have Create Table permissions on the specified dataset.
+This automatically creates google.cloud.storage and google.cloud.bigquery Client instances,
+but you can pass your own to the constructor if you need to specify details.
 
 Loading data from BigQuery into a pandas Data Frame:
 
 .. code-block:: python
 
-    df = io.bq_to_df('SELECT fields FROM dataset.table_name')
+    df = io.bq_to_df('SELECT fields FROM `project.dataset.table_name`')
 
 Loading data from pandas Data Frame into BigQuery:
 

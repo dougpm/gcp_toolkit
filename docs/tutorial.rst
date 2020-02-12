@@ -33,7 +33,7 @@ but you can pass your own to the constructor if you need to specify details.
 
 .. code-block:: python
 
-    df = io.bq_to_df('SELECT fields FROM `project.dataset.table_name`')
+    df = io.bq_to_df('SELECT fields FROM dataset.table_name')
 
 **Loading data from pandas Data Frame into BigQuery:**
 

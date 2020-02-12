@@ -102,15 +102,15 @@ class IO:
 
         """Loads a csv from Storage into a BigQuery table"""
 
-    job_config = bigquery.LoadJobConfig()
-    if schema:
-        job.config.schema = schema
-    else:
-        job_config.autodetect = True
-    #TODO: options
-    job_config.write_disposition = bigquery.WriteDisposition.WRITE_TRUNCATE
-    job_config.field_delimiter = csv_delimiter
-    source = 'gs://{}/{}'.format(self.bucket_name, path_to_file)
-    job = self.bq_client.load_table_from_uri(source, table_id)
-    job.result()
+        job_config = bigquery.LoadJobConfig()
+        if schema:
+            job.config.schema = schema
+        else:
+            job_config.autodetect = True
+        #TODO: options
+        job_config.write_disposition = bigquery.WriteDisposition.WRITE_TRUNCATE
+        job_config.field_delimiter = csv_delimiter
+        source = 'gs://{}/{}'.format(self.bucket_name, path_to_file)
+        job = self.bq_client.load_table_from_uri(source, table_id)
+        job.result()
     

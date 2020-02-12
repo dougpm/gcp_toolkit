@@ -6,7 +6,7 @@ import pandas as pd
 import gcp_toolkit.utils as gtku
 
 #TODO: separate bq and storage classes
-
+#TODO: tests
 class IO:
     def __init__(self, bucket_name, staging_dataset, bq_client=None, storage_client=None):
         self.bq_client = bigquery.Client() if bq_client is None else bq_client

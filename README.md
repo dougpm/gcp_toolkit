@@ -20,7 +20,10 @@ Here are some features:
 To use the toolkit, clone this repo into your project root folder and copy the gcp_toolkit package:
 
 ```sh
-git clone https://github.com/dougpm/gcp_toolkit.git
+git clone https://github.com/dougpm/gcp_toolkit.git && \
+cp -r gcp_toolkit/gcp_toolkit gcp_toolkit2 && \
+rm -rf gcp_toolkit && \
+mv gcp_toolkit2 gcp_toolkit
 ```
 
 Then import it in your code:
@@ -36,7 +39,7 @@ You can now use methods like:
 df = io.bucket_to_df('path/to/bucket/files/files_prefix*')
 ```
 
-A complete description of funcionalities is available in the [Documentation](https://gcp-toolkit.readthedocs.io/en/latest/).
+A complete description of funcionalities is available in the [Documentation](https://gcp-toolkit.readthedocs.io/en/latest/tutorial.html).
 
 ## License
 

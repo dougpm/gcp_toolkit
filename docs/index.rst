@@ -10,17 +10,11 @@ Welcome to gcp_toolkit's documentation!
 perform common operations on **Google Cloud Platform**, such as moving data from
 a BigQuery table to Storage or loading it into a **pandas** Data Frame for analysis.
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Contents:
-
-
-
-Indices and tables
+Contents
 ==================
 
 .. toctree::
    :maxdepth: 1 
 
-   Tutorial <tutorial>
+   Usage guide <tutorial>
    API Reference <modules>

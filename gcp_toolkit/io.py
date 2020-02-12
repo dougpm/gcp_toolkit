@@ -6,6 +6,7 @@ import pandas as pd
 import gcp_toolkit.utils as gtku
 
 #TODO: separate bq and storage classes
+
 class IO:
     def __init__(self, bucket_name, bq_client=None, storage_client=None):
         self.bucket_name = bucket_name
@@ -54,7 +55,7 @@ class IO:
         return df
 
 
-    def bq_to_df(self, query, staging_dataset=None, use_builtin=True):
+    def bq_to_df(self, query, staging_dataset=None, use_builtin=False):
         
         """Runs a query in BigQuery and loads the results into a pandas Data Frame"""
         
@@ -66,12 +67,14 @@ class IO:
             raise
             #TODO: create random staging dataset function in utils, call it in constructor
 
+        #it takes way too long to load very large tables with to_dataframe(), so doing the following is faster:
+
         letters = string.ascii_lowercase
         staging_blob = ''.join(random.choice(letters) for i in range(100)) + '/'
         gtku.create_bucket_folder(self.bucket_name, staging_blob)
         print('Created {}'.format(staging_blob))
         
-        self.bq_to_bucket(query, 'gs://{}/{}results'.format(self.bucket_name, staging_blob), staging_dataset)
+        self.bq_to_bucket(query, 'gs://{}/{}results*'.format(self.bucket_name, staging_blob), staging_dataset)
         df = self.bucket_to_df('{}results'.format(staging_blob))
 
         #TODO: finally statement or context manager

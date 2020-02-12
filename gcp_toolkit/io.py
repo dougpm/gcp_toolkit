@@ -98,7 +98,7 @@ class IO:
         job = self.bq_client.load_table_from_dataframe(df, table_id, job_config=job_config)
         job.result()
 
-    def bucket_to_bq(path_to_file, table_id, schema=[], csv_delimiter=','):
+    def bucket_to_bq(self, path_to_file, table_id, schema=[], csv_delimiter=','):
 
         """Loads a csv from Storage into a BigQuery table"""
 

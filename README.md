@@ -41,7 +41,7 @@ You can now use methods like:
 df = io.bq_to_df('SELECT fields FROM dataset.table_name')
 ```
 
-A complete description of funcionalities is available in the [Documentation](https://gcp-toolkit.readthedocs.io/en/latest/tutorial.html).
+A complete description of funcionalities is available in the [Tutorial](https://gcp-toolkit.readthedocs.io/en/latest/tutorial.html).
 
 ## License
 

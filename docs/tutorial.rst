@@ -54,7 +54,7 @@ but you can pass your own to the constructor if you need to specify details.
     df = io.bq_to_bucket('SELECT fields FROM dataset.table_name', 
                          'path/to/files/file_name')
 
-**Note:** The above may fail occasionally due to the table being to big to be extracted to a single file.
+**Note:** The above may fail occasionally due to the table being too big to be extracted to a single file.
 In that case, you must add a '*' wildcard to the file name, like so:
 
 .. code-block:: python

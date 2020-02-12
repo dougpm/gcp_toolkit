@@ -15,7 +15,7 @@ With an activated Python 3 virtual env, clone the repository into your project r
 io module
 ---------
 
-Using the IO class:
+**Using the IO class:**
 
 .. code-block:: python
 
@@ -23,36 +23,38 @@ Using the IO class:
 
     io = gtk.IO('your-bucket-name', 'your-dataset-name')
 
-Note: You must have Create Table permissions on the specified dataset.
 This automatically creates google.cloud.storage and google.cloud.bigquery Client instances,
 but you can pass your own to the constructor if you need to specify details.
 
-Loading data from BigQuery into a pandas Data Frame:
+**Note:** You must have Create Table permissions on the specified dataset.
+
+
+**Loading data from BigQuery into a pandas Data Frame:**
 
 .. code-block:: python
 
     df = io.bq_to_df('SELECT fields FROM `project.dataset.table_name`')
 
-Loading data from pandas Data Frame into BigQuery:
+**Loading data from pandas Data Frame into BigQuery:**
 
 .. code-block:: python
 
     io.df_to_bq(df, 'dataset.table_name')
 
-Loading data from Storage bucket into pandas Data Frame:
+**Loading data from Storage bucket into pandas Data Frame:**
 
 .. code-block:: python
 
     df = io.bucket_to_df('path/to/bucket/files/files_prefix*')
 
-Moving data from BigQuery to Storage:
+**Moving data from BigQuery to Storage:**
 
 .. code-block:: python
 
     df = io.bq_to_bucket('SELECT fields FROM dataset.table_name', 
                          'path/to/files/file_name')
 
-Note: The above may fail occasionally due to the table being to big to be extracted to a single file.
+**Note:** The above may fail occasionally due to the table being to big to be extracted to a single file.
 In that case, you must add a '*' wildcard to the file name, like so:
 
 .. code-block:: python

@@ -86,9 +86,31 @@ class IO:
 
     def df_to_bq(self, df, table_id, schema=[]):
 
-        """Writes a pandas Data Frame to a BigQuery table."""
+        """Loads a pandas Data Frame into a BigQuery table."""
 
-        job_config = bigquery.LoadJobConfig(schema=schema)
+        job_config = bigquery.LoadJobConfig()
+        if schema:
+            job_config.schema = schema
+        else:
+            job_config.autodetect = True
+        #TODO: options
         job_config.write_disposition = bigquery.WriteDisposition.WRITE_TRUNCATE
         job = self.bq_client.load_table_from_dataframe(df, table_id, job_config=job_config)
         job.result()
+
+    def bucket_to_bq(path_to_file, table_id, schema=[], csv_delimiter=','):
+
+        """Loads a csv from Storage into a BigQuery table"""
+
+    job_config = bigquery.LoadJobConfig()
+    if schema:
+        job.config.schema = schema
+    else:
+        job_config.autodetect = True
+    #TODO: options
+    job_config.write_disposition = bigquery.WriteDisposition.WRITE_TRUNCATE
+    job_config.field_delimiter = csv_delimiter
+    source = 'gs://{}/{}'.format(self.bucket_name, path_to_file)
+    job = self.bq_client.load_table_from_uri(source, table_id)
+    job.result()
+    

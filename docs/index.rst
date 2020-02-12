@@ -8,7 +8,7 @@ Welcome to gcp_toolkit's documentation!
 
 **gcp_toolkit** is a Python package that makes it easier to 
 perform common operations on **Google Cloud Platform**, such as moving data from
-a BigQuery table to Storage or loading it into a **pandas** Data Frame for analysis.
+a BigQuery table to Storage or loading it into a **pandas** Data Frame.
 
 Contents
 ==================

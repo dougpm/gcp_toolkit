@@ -111,6 +111,6 @@ class IO:
         job_config.write_disposition = bigquery.WriteDisposition.WRITE_TRUNCATE
         job_config.field_delimiter = csv_delimiter
         source = 'gs://{}/{}'.format(self.bucket_name, path_to_file)
-        job = self.bq_client.load_table_from_uri(source, table_id)
+        job = self.bq_client.load_table_from_uri(source, table_id, job_config=job_config)
         job.result()
     

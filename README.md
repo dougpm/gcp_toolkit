@@ -38,7 +38,7 @@ io = gtk.IO('your-bucket-name', 'your-dataset-name')
 
 You can now use methods like:
 ```python
-df = io.bucket_to_df('path/to/bucket/files/files_prefix*')
+df = io.bq_to_df('SELECT fields FROM dataset.table_name')
 ```
 
 A complete description of funcionalities is available in the [Documentation](https://gcp-toolkit.readthedocs.io/en/latest/tutorial.html).

@@ -9,10 +9,17 @@ import gcp_toolkit.utils as gtku
 
 class IO:
     def __init__(self, bucket_name, bq_client=None, storage_client=None):
-        self.bucket_name = bucket_name
         self.bq_client = bigquery.Client() if bq_client is None else bq_client
         self.storage_client = storage.Client() if storage_client is None else storage_client
-
+        try:
+            self.bucket = self.storage_client.get_bucket(bucket_name)
+        except Exception as e:
+            if '403' in str(e):
+                print("User doesn't have access to {}".format(bucket_name))
+            if '404' in str(e):
+                print("Bucket {} doesn't exist".format(bucket_name))
+            else:
+                print(e)
     def bq_to_bucket(self, query, path_to_file, staging_dataset=None):
 
         """Runs query in BigQuery and stores results in Storage"""

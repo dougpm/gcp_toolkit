@@ -36,7 +36,7 @@ You can now use methods like:
 df = io.bucket_to_df('path/to/bucket/files/files_prefix*')
 ```
 
-A complete description of funcionalities is available in the Documentation.
+A complete description of funcionalities is available in the [Documentation](https://gcp-toolkit.readthedocs.io/en/latest/).
 
 ## License
 

@@ -1,3 +1,4 @@
+[![Documentation Status](https://readthedocs.org/projects/gcp-toolkit/badge/?version=latest)](https://gcp-toolkit.readthedocs.io/en/latest/?badge=latest)
 # gcp_toolkit: Something to make interacting with Google Cloud Platform APIs easier
 
 ## What is it?

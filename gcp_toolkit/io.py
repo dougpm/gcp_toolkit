@@ -104,7 +104,7 @@ class IO:
 
         job_config = bigquery.LoadJobConfig()
         if schema:
-            job.config.schema = schema
+            job_config.schema = schema
         else:
             job_config.autodetect = True
         #TODO: options

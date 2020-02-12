@@ -22,6 +22,8 @@ To use the toolkit, clone this repo into your project root folder and copy the g
 ```sh
 git clone https://github.com/dougpm/gcp_toolkit.git && \
 cp -r gcp_toolkit/gcp_toolkit gcp_toolkit2 && \
+cp gcp_toolkit/requirements.txt . && \
+pip install -r requirements.txt && \ 
 rm -rf gcp_toolkit && \
 mv gcp_toolkit2 gcp_toolkit
 ```
@@ -44,6 +46,8 @@ A complete description of funcionalities is available in the [Documentation](htt
 ## License
 
 ## Documentation
+
+Documentation is availabe [here](https://gcp-toolkit.readthedocs.io/en/latest/)
 
 ## Contributing 
 

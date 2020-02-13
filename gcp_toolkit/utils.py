@@ -33,7 +33,7 @@ def change_table_schema(table_id, new_fields, bigquery_client=None):
     for name, field_type in new_fields:
         new_schema.append(bigquery.SchemaField("{}".format(name), "{}".format(field_type)))
     table.schema = new_schema
-    table = client.update_table(table, ["schema"])
+    table = bq_client.update_table(table, ["schema"])
 
 
 

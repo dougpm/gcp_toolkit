@@ -22,6 +22,21 @@ def convert_pandas_gbq_schema(schema):
         new_schema.append(bigquery.SchemaField(field['name'], field['type']))
     return new_schema
 
+def change_table_schema(table_id, new_fields, bigquery_client=None):
+
+    """Updates a table schema with new fields"""
+    
+    bq_client = bigquery.Client() if bigquery_client is None else bigquery_client
+    table = bq_client.get_table(table_id)
+    original_schema = table.schema
+    new_schema = original_schema[:]
+    for name, field_type in new_fields:
+        new_schema.append(bigquery.SchemaField("{}".format(name), "{}".format(field_type)))
+    table.schema = new_schema
+    table = client.update_table(table, ["schema"])
+
+
+
 #TODO: create dataset
 #TODO: create bq table
 #TODO: create bq table schema

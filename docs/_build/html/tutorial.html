@@ -1,0 +1,152 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Tutorial &#8212; gcp_toolkit 0.0.1 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="gcp_toolkit" href="modules.html" />
+    <link rel="prev" title="Welcome to gcp_toolkit’s documentation!" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="tutorial">
+<h1>Tutorial<a class="headerlink" href="#tutorial" title="Permalink to this headline">¶</a></h1>
+<p>With an activated Python 3 virtual env, clone the repository into your project root folder, install required libraries and copy the package from inside:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/dougpm/gcp_toolkit.git <span class="o">&amp;&amp;</span> <span class="se">\</span>
+cp -r gcp_toolkit/gcp_toolkit gcp_toolkit2 <span class="o">&amp;&amp;</span> <span class="se">\</span>
+cp gcp_toolkit/requirements.txt . <span class="o">&amp;&amp;</span> <span class="se">\</span>
+pip install -r requirements.txt <span class="o">&amp;&amp;</span> <span class="se">\</span>
+rm -rf gcp_toolkit <span class="o">&amp;&amp;</span> <span class="se">\</span>
+mv gcp_toolkit2 gcp_toolkit
+</pre></div>
+</div>
+<div class="section" id="io-module">
+<h2>io module<a class="headerlink" href="#io-module" title="Permalink to this headline">¶</a></h2>
+<p><strong>Using the IO class:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">gcp_toolkit</span> <span class="k">as</span> <span class="nn">gtk</span>
+
+<span class="n">io</span> <span class="o">=</span> <span class="n">gtk</span><span class="o">.</span><span class="n">IO</span><span class="p">(</span><span class="s1">&#39;your-bucket-name&#39;</span><span class="p">,</span> <span class="s1">&#39;your-dataset-name&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This automatically creates google.cloud.storage and google.cloud.bigquery Client instances,
+but you can pass your own to the constructor if you need to specify details.</p>
+<p><strong>Note:</strong> You must have Create Table permissions on the specified dataset.</p>
+<p><strong>Loading data from BigQuery into a pandas Data Frame:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">bq_to_df</span><span class="p">(</span><span class="s1">&#39;SELECT fields FROM `project.dataset.table_name`&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Loading data from pandas Data Frame into BigQuery:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">io</span><span class="o">.</span><span class="n">df_to_bq</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;dataset.table_name&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Loading data from Storage bucket into pandas Data Frame:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">bucket_to_df</span><span class="p">(</span><span class="s1">&#39;path/to/bucket/files/files_prefix*&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Moving data from BigQuery to Storage:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">bq_to_bucket</span><span class="p">(</span><span class="s1">&#39;SELECT fields FROM dataset.table_name&#39;</span><span class="p">,</span>
+                     <span class="s1">&#39;path/to/files/file_name&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Note:</strong> The above may fail occasionally due to the table being to big to be extracted to a single file.
+In that case, you must add a ‘*’ wildcard to the file name, like so:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">bq_to_bucket</span><span class="p">(</span><span class="s1">&#39;SELECT fields FROM dataset.table_name&#39;</span><span class="p">,</span>
+                     <span class="s1">&#39;path/to/files/file_name*&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">gcp_toolkit</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Usage guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">API Reference</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">Welcome to gcp_toolkit’s documentation!</a></li>
+      <li>Next: <a href="modules.html" title="next chapter">gcp_toolkit</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Douglas Martins.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.4.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/tutorial.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

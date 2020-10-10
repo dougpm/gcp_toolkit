@@ -1,0 +1,150 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>gcp toolkit &#8212; gcp_toolkit 0.0.1 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="gcp_toolkit" href="modules.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="gcp-toolkit">
+<h1>gcp toolkit<a class="headerlink" href="#gcp-toolkit" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-gcp_toolkit.io">
+<span id="io-module"></span><h2>io module<a class="headerlink" href="#module-gcp_toolkit.io" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="gcp_toolkit.io.IO">
+<em class="property">class </em><code class="sig-prename descclassname">gcp_toolkit.io.</code><code class="sig-name descname">IO</code><span class="sig-paren">(</span><em class="sig-param">bucket_name</em>, <em class="sig-param">staging_dataset</em>, <em class="sig-param">bq_client=None</em>, <em class="sig-param">storage_client=None</em><span class="sig-paren">)</span><a class="headerlink" href="#gcp_toolkit.io.IO" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="gcp_toolkit.io.IO.bq_to_bucket">
+<code class="sig-name descname">bq_to_bucket</code><span class="sig-paren">(</span><em class="sig-param">query</em>, <em class="sig-param">path_to_file</em><span class="sig-paren">)</span><a class="headerlink" href="#gcp_toolkit.io.IO.bq_to_bucket" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs query in BigQuery and stores results in Storage</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gcp_toolkit.io.IO.bq_to_df">
+<code class="sig-name descname">bq_to_df</code><span class="sig-paren">(</span><em class="sig-param">query</em>, <em class="sig-param">use_builtin=False</em><span class="sig-paren">)</span><a class="headerlink" href="#gcp_toolkit.io.IO.bq_to_df" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs a query in BigQuery and loads the results into a pandas Data Frame</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gcp_toolkit.io.IO.bucket_to_df">
+<code class="sig-name descname">bucket_to_df</code><span class="sig-paren">(</span><em class="sig-param">path_to_file</em><span class="sig-paren">)</span><a class="headerlink" href="#gcp_toolkit.io.IO.bucket_to_df" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads a file or a group of files matching a pattern into a pandas Data Frame</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gcp_toolkit.io.IO.df_to_bq">
+<code class="sig-name descname">df_to_bq</code><span class="sig-paren">(</span><em class="sig-param">df</em>, <em class="sig-param">table_id</em>, <em class="sig-param">schema=[]</em><span class="sig-paren">)</span><a class="headerlink" href="#gcp_toolkit.io.IO.df_to_bq" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes a pandas Data Frame to a BigQuery table.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-gcp_toolkit.utils">
+<span id="utils-module"></span><h2>utils module<a class="headerlink" href="#module-gcp_toolkit.utils" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="gcp_toolkit.utils.create_bucket_folder">
+<code class="sig-prename descclassname">gcp_toolkit.utils.</code><code class="sig-name descname">create_bucket_folder</code><span class="sig-paren">(</span><em class="sig-param">bucket_name</em>, <em class="sig-param">folder_name</em>, <em class="sig-param">storage_client=None</em><span class="sig-paren">)</span><a class="headerlink" href="#gcp_toolkit.utils.create_bucket_folder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a Folder in Storage</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">gcp_toolkit</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Usage guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">API Reference</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">gcp_toolkit</a><ul>
+      <li>Previous: <a href="modules.html" title="previous chapter">gcp_toolkit</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Douglas Martins.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.4.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/gcp_toolkit.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
